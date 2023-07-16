@@ -32,16 +32,16 @@
     container.appendChild(minimizeButton);
 
     // Create checkboxes for configuring search links
-    var youtubeCheckbox = createCheckbox('YouTube', 'youtubeCheckbox');
-    var googleCheckbox = createCheckbox('Google', 'googleCheckbox');
-    var wikipediaCheckbox = createCheckbox('Wikipedia', 'wikipediaCheckbox');
+    var netoCheckbox = createCheckbox('Neto', 'netoCheckbox');
+    var unleashedCheckbox = createCheckbox('Unleashed', 'unleashedCheckbox');
+    var gmailCheckbox = createCheckbox('Gmail', 'gmailCheckbox');
     var TrackingCheckbox = createCheckbox('Tracking', 'trackingCheckbox');
 
 
     // Append the checkboxes to the container
-    container.appendChild(youtubeCheckbox);
-    container.appendChild(googleCheckbox);
-    container.appendChild(wikipediaCheckbox);
+    container.appendChild(netoCheckbox);
+    container.appendChild(unleashedCheckbox);
+    container.appendChild(gmailCheckbox);
     container.appendChild(TrackingCheckbox);
 
 
@@ -65,27 +65,60 @@
         if (searchQuery !== '') {
             var searchUrls = [];
 
-            if (youtubeCheckbox.querySelector('input').checked) {
-                var youtubeSearchUrl = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(searchQuery);
-                searchUrls.push(youtubeSearchUrl);
+            if (netoCheckbox.querySelector('input').checked) 
+            {
+                var netoSearchUrl = "";
+                if(searchQuery.includes("@"))
+                {
+                    netoSearchUrl = "Customer email search!" + encodeURIComponent(searchQuery);
+                }
+                else if
+                (
+                    searchQuery.slice(0,3) === "n10" || 
+                    searchQuery.slice(0,3) === "N10" ||
+                    searchQuery.slice(0,3) === "R1 stuff here for in store purchases." 
+                )
+                {
+                    netoSearchUrl = " neto order search!" + encodeURIComponent(searchQuery);
+                }
+
+                netoSearchUrl = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(searchQuery);
+                searchUrls.push(netoSearchUrl);
             }
             if (TrackingCheckbox.querySelector('input').checked) {
                 var TrackingSearchUrl;
+                var Analysiscomplete = false;
                 if(searchQuery.slice(0,3) === "38T")
                 {
                   TrackingSearchUrl = 'https://auspost.com.au/mypost/beta/track/details/' + encodeURIComponent(searchQuery);
+                  Analysiscomplete = true;
                 }
-                searchUrls.push(TrackingSearchUrl);
+                if(searchQuery.slice(0,1) === "m" || searchQuery.slice(0,1) === "m")
+                {
+                  TrackingSearchUrl = 'https://www.aramex.com.au/tools/track?l=' + encodeURIComponent(searchQuery);
+                  Analysiscomplete = true;
+                }
+                if(searchQuery.slice(0,2) === "cp" || searchQuery.slice(0,2) === "CP")
+                {
+                  TrackingSearchUrl = 'https://www.aramex.com.au/tools/track?l=' + encodeURIComponent(searchQuery);
+                  Analysiscomplete = true;
+                }
+                if(Analysiscomplete)
+                {
+                    searchUrls.push(TrackingSearchUrl);
+                }
+                
             }
 
-            if (googleCheckbox.querySelector('input').checked) {
-                var googleSearchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(searchQuery);
-                searchUrls.push(googleSearchUrl);
+            if (unleashedCheckbox.querySelector('input').checked) {
+                var unleashedSearchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(searchQuery);
+                //todo: Change above link to work with unleashed.
+                searchUrls.push(unleashedSearchUrl);
             }
 
-            if (wikipediaCheckbox.querySelector('input').checked) {
-                var wikipediaSearchUrl = 'https://en.wikipedia.org/wiki/Special:Search?search=' + encodeURIComponent(searchQuery);
-                searchUrls.push(wikipediaSearchUrl);
+            if (gmailCheckbox.querySelector('input').checked) {
+                var gmailSearchUrl = 'https://mail.google.com/mail/u/0/#search/' + encodeURIComponent(searchQuery);
+                searchUrls.push(gmailSearchUrl);
             }
 
             if (searchUrls.length > 0) {
