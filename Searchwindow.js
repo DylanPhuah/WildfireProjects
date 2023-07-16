@@ -35,11 +35,15 @@
     var youtubeCheckbox = createCheckbox('YouTube', 'youtubeCheckbox');
     var googleCheckbox = createCheckbox('Google', 'googleCheckbox');
     var wikipediaCheckbox = createCheckbox('Wikipedia', 'wikipediaCheckbox');
+    var TrackingCheckbox = createCheckbox('Tracking', 'trackingCheckbox');
+
 
     // Append the checkboxes to the container
     container.appendChild(youtubeCheckbox);
     container.appendChild(googleCheckbox);
     container.appendChild(wikipediaCheckbox);
+    container.appendChild(TrackingCheckbox);
+
 
     // Add an event listener to the search button
 
@@ -64,6 +68,14 @@
             if (youtubeCheckbox.querySelector('input').checked) {
                 var youtubeSearchUrl = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(searchQuery);
                 searchUrls.push(youtubeSearchUrl);
+            }
+            if (TrackingCheckbox.querySelector('input').checked) {
+                var TrackingSearchUrl;
+                if(searchQuery.slice(0,3) === "38T")
+                {
+                  TrackingSearchUrl = 'https://auspost.com.au/mypost/beta/track/details/' + encodeURIComponent(searchQuery);
+                }
+                searchUrls.push(TrackingSearchUrl);
             }
 
             if (googleCheckbox.querySelector('input').checked) {
