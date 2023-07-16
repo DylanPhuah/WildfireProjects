@@ -3,7 +3,7 @@
 // @namespace    http://your-namespace.example/
 // @version      1.0
 // @description  Creates a search window in the top right corner of the screen with checkboxes to configure search links
-// @author       Your Name
+// @author       Dylan Phuah
 // @match      *://*/*
 // @grant        GM_addStyle
 // ==/UserScript==
