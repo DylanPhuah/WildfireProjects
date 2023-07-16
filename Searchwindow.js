@@ -65,53 +65,43 @@
         if (searchQuery !== '') {
             var searchUrls = [];
 
-            if (netoCheckbox.querySelector('input').checked) 
+            if (netoCheckbox.querySelector('input').checked)
             {
                 var netoSearchUrl = "";
-                if(searchQuery.includes("@"))
-                {
-                    netoSearchUrl = "Customer email search!" + encodeURIComponent(searchQuery);
-                }
-                else if
-                (
-                    searchQuery.slice(0,3) === "n10" || 
-                    searchQuery.slice(0,3) === "N10" ||
-                    searchQuery.slice(0,3) === "R1 stuff here for in store purchases." 
-                )
-                {
-                    netoSearchUrl = " neto order search!" + encodeURIComponent(searchQuery);
-                }
+                
+                
+                    netoSearchUrl = "https://www.wildfiresports.com.au/_cpanel/order/vieworder?id=" + encodeURIComponent(searchQuery);
+                
 
-                netoSearchUrl = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(searchQuery);
                 searchUrls.push(netoSearchUrl);
             }
             if (TrackingCheckbox.querySelector('input').checked) {
                 var TrackingSearchUrl;
                 var Analysiscomplete = false;
-                if(searchQuery.slice(0,3) === "38T")
+                if(searchQuery.slice(0,2) === "U6")
                 {
                   TrackingSearchUrl = 'https://auspost.com.au/mypost/beta/track/details/' + encodeURIComponent(searchQuery);
                   Analysiscomplete = true;
                 }
-                if(searchQuery.slice(0,1) === "m" || searchQuery.slice(0,1) === "m")
+                if(searchQuery.slice(0,1) === "m" || searchQuery.slice(0,1) === "M")
                 {
                   TrackingSearchUrl = 'https://www.aramex.com.au/tools/track?l=' + encodeURIComponent(searchQuery);
                   Analysiscomplete = true;
                 }
                 if(searchQuery.slice(0,2) === "cp" || searchQuery.slice(0,2) === "CP")
                 {
-                  TrackingSearchUrl = 'https://www.aramex.com.au/tools/track?l=' + encodeURIComponent(searchQuery);
+                  TrackingSearchUrl = 'https://www.couriersplease.com.au/tools-track/no/' + encodeURIComponent(searchQuery);
                   Analysiscomplete = true;
                 }
                 if(Analysiscomplete)
                 {
                     searchUrls.push(TrackingSearchUrl);
                 }
-                
+
             }
 
             if (unleashedCheckbox.querySelector('input').checked) {
-                var unleashedSearchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(searchQuery);
+                var unleashedSearchUrl = 'https://au.unleashedsoftware.com/v2/Product/List#ProductFilter=' + encodeURIComponent(searchQuery);
                 //todo: Change above link to work with unleashed.
                 searchUrls.push(unleashedSearchUrl);
             }
